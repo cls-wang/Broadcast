@@ -4,6 +4,7 @@
 - Vue 3 (Composition API)
 - Vite (Build Tool)
 - Tailwind CSS (Styling)
+- Vitest (Testing Framework)
 
 ## 播放邏輯
 - **HTTPS 電台**：使用 `<audio>` 標籤直接播放
@@ -27,6 +28,8 @@
 - `npm run dev` - 啟動開發伺服器
 - `npm run build` - 打包生產版本
 - `npm run preview` - 預覽生產版本
+- `npm run test` - 執行測試（watch 模式）
+- `npm run test:run` - 執行測試（單次）
 
 ## 部署
 專案配置為 GitHub Pages 部署，打包後的檔案位於 `dist/` 目錄。
@@ -41,7 +44,7 @@
    - `refactor/optimize-modal` - 重構
    - `style/update-button-design` - 樣式調整
 3. **開發流程**：
-   - 建立新分支 → 開發功能 → 執行 `npm run build` 測試
+   - 建立新分支 → 開發功能 → 執行 `npm run test:run` 與 `npm run build`
    - 測試通過後自動 commit（使用規範的 Commit Message）
    - 提示使用者是否要合併回 `main` 並執行部署
 

@@ -6,4 +6,8 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [vue(), tailwindcss()],
   base: './',
+  test: {
+    globals: true,
+    environment: 'jsdom',
+  },
 })

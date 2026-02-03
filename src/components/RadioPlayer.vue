@@ -1,16 +1,13 @@
 <script setup>
 import { ref, onUnmounted } from 'vue'
 import { stations } from '../data/stations.js'
+import { isHttpsUrl } from '../utils/url.js'
 
 const currentStation = ref(null)
 const isPlaying = ref(false)
 const audioElement = ref(null)
 const showExternalModal = ref(false)
 const pendingExternalStation = ref(null)
-
-const isHttpsUrl = (url) => {
-  return url.startsWith('https')
-}
 
 const playStation = (station) => {
   if (isHttpsUrl(station.url)) {
