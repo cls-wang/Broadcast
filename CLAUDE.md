@@ -30,3 +30,6 @@
 
 ## 部署
 專案配置為 GitHub Pages 部署，打包後的檔案位於 `dist/` 目錄。
+
+## 開發規範
+- **自動提交規則**：每當完成一個功能修改並通過測試，必須自動執行 `git commit`，並使用規範的 Commit Message（格式：`<type>: <description>`，例如 `feat: 新增外連電台提示彈窗`）。

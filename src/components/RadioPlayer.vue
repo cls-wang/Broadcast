@@ -5,6 +5,8 @@ import { stations } from '../data/stations.js'
 const currentStation = ref(null)
 const isPlaying = ref(false)
 const audioElement = ref(null)
+const showExternalModal = ref(false)
+const pendingExternalStation = ref(null)
 
 const isHttpsUrl = (url) => {
   return url.startsWith('https')
@@ -43,9 +45,22 @@ const playStation = (station) => {
       })
     }
   } else {
-    // HTTP stream - open in new tab
-    window.open(station.url, '_blank')
+    // HTTP stream - show confirmation modal
+    pendingExternalStation.value = station
+    showExternalModal.value = true
   }
+}
+
+const confirmExternalOpen = () => {
+  if (pendingExternalStation.value) {
+    window.open(pendingExternalStation.value.url, '_blank')
+  }
+  closeExternalModal()
+}
+
+const closeExternalModal = () => {
+  showExternalModal.value = false
+  pendingExternalStation.value = null
 }
 
 const pauseAudio = () => {
@@ -196,5 +211,83 @@ onUnmounted(() => {
         </button>
       </div>
     </div>
+
+    <!-- External Station Modal -->
+    <Teleport to="body">
+      <Transition name="modal">
+        <div
+          v-if="showExternalModal"
+          class="fixed inset-0 z-50 flex items-center justify-center p-4"
+          @click.self="closeExternalModal"
+        >
+          <!-- Backdrop -->
+          <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+          <!-- Modal Content -->
+          <div class="relative w-full max-w-sm rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 p-6 shadow-2xl ring-1 ring-white/10">
+            <!-- Warning Icon -->
+            <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-500/20">
+              <svg class="h-7 w-7 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+
+            <!-- Title -->
+            <h3 class="mb-2 text-center text-lg font-semibold text-white">
+              外部連結提示
+            </h3>
+
+            <!-- Station Name -->
+            <p class="mb-3 text-center text-emerald-400 font-medium">
+              {{ pendingExternalStation?.name }}
+            </p>
+
+            <!-- Description -->
+            <p class="mb-6 text-center text-sm text-slate-400 leading-relaxed">
+              此電台不支援加密傳輸（HTTP），即將開啟外部網頁播放。
+            </p>
+
+            <!-- Buttons -->
+            <div class="flex gap-3">
+              <button
+                @click="closeExternalModal"
+                class="flex-1 rounded-xl bg-slate-700 px-4 py-3 font-medium text-slate-300 transition-all duration-200 hover:bg-slate-600 active:scale-95"
+              >
+                取消
+              </button>
+              <button
+                @click="confirmExternalOpen"
+                class="flex-1 rounded-xl bg-emerald-500 px-4 py-3 font-medium text-white transition-all duration-200 hover:bg-emerald-400 active:scale-95"
+              >
+                確認開啟
+              </button>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>
+
+<style scoped>
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-active .relative,
+.modal-leave-active .relative {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal-enter-from .relative,
+.modal-leave-to .relative {
+  transform: scale(0.9);
+  opacity: 0;
+}
+</style>
