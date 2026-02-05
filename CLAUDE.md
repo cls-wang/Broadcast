@@ -136,6 +136,16 @@
 3. For code changes: ALWAYS use feature branch
 ```
 
+## Agents
+
+Available agents are located in `.claude/agents/`:
+
+- **spec-designer** - Designs and maintains feature specifications
+  - Use BEFORE implementing new features
+  - Creates/updates specs in `docs/specs/`
+  - Ensures consistency with existing spec structure
+  - Provides implementation guidance to main agent
+
 ## Custom Skills
 
 Available skills are located in `.claude/skills/`:
