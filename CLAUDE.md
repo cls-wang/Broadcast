@@ -1,53 +1,190 @@
 # Web Radio Player
 
-## 技術棧
-- Vue 3 (Composition API)
-- Vite (Build Tool)
-- Tailwind CSS (Styling)
-- Vitest (Testing Framework)
+> Claude Code 專案規範：開發工作流程、程式碼風格與關鍵規則
 
-## 播放邏輯
-- **HTTPS 電台**：使用 `<audio>` 標籤直接播放
-- **HTTP 電台**：使用 `target="_blank"` 外連開啟新視窗播放
+## Quick Facts
 
-## 目標平台
-- 優化手機端 Chrome 與 Safari 的操作體驗
-- 觸控友善的大按鈕設計
-- 響應式布局適配各種螢幕尺寸
+- **Stack**: Vue 3 (Composition API), Vite, Tailwind CSS, Vitest
+- **Test Command**: `npm run test:run`
+- **Build Command**: `npm run build`
+- **Deploy Command**: `/deploy` skill
+- **Main Branch**: `main`
+- **Specs Location**: See `docs/specs/` for feature specifications
 
-## 電台資料格式
-```javascript
-{
-  id: 1,
-  name: '電台名稱',
-  url: 'https://stream.example.com/radio'
-}
+## Key Directories
+
+- `src/` - Vue 3 應用程式原始碼
+- `tests/` - Vitest 測試檔案
+- `public/` - 靜態公開檔案
+- `dist/` - 生產版本輸出（部署到 GitHub Pages）
+- `docs/specs/` - 功能規格文件（播放邏輯、資料結構、UI 設計）
+- `.claude/skills/` - Claude Code 自定義 skills
+
+## Code Style
+
+- Vue 3 Composition API with `<script setup>` syntax
+- Prefer arrow functions for event handlers
+- Use reactive state with `ref()` and `reactive()`
+- Component should be self-contained and reusable
+- Use Tailwind utility classes, avoid custom CSS unless necessary
+- Early returns over nested conditionals
+- Prefer composition over inheritance
+- No TypeScript `any` - use proper types or `unknown`
+
+## Git Conventions
+
+### Branch Naming
+- **Rule**: All code changes (except `CLAUDE.md` or `README.md`) MUST be on feature branches
+- **Format**: `<type>/<short-description>`
+- **Types**:
+  - `feat/` - New features
+  - `fix/` - Bug fixes
+  - `refactor/` - Code refactoring
+  - `style/` - UI/styling changes
+  - `test/` - Test additions or updates
+  - `docs/` - Documentation updates
+- **Examples**:
+  - `feat/add-volume-control`
+  - `fix/audio-playback-error`
+  - `refactor/optimize-modal`
+  - `style/update-button-design`
+
+### Commit Format
+- **Style**: Conventional Commits
+- **Format**: `<type>: <description>`
+- **Description**: Clear, concise, in Chinese or English
+- **Examples**:
+  - `feat: 新增音量控制功能`
+  - `fix: 修正 HTTPS 電台播放錯誤`
+  - `refactor: 重構彈窗元件邏輯`
+  - `style: 更新按鈕樣式與間距`
+  - `test: 新增播放邏輯測試`
+  - `docs: 更新 API 文件`
+
+### Automated Workflow
+
+1. **Branch Creation**: Automatically create feature branch based on task
+2. **Development**: Write code following project conventions
+3. **Testing**: Run `npm run test:run` to verify all tests pass
+4. **Building**: Run `npm run build` to ensure production build succeeds
+5. **Auto Commit**: Automatically commit with conventional commit message
+6. **Auto Push**: Push to GitHub after user confirmation
+7. **Merge & Deploy**: Prompt user to merge to `main` and deploy
+
+## Critical Rules
+
+### Testing Requirements
+- NEVER commit without running tests first
+- All tests MUST pass before committing
+- If adding new features, add corresponding tests
+- Run `npm run test:run` before every commit
+- Test coverage should be maintained or improved
+
+### Build Verification
+- ALWAYS run `npm run build` before committing
+- Production build MUST succeed without errors
+- Check console for warnings and resolve them
+- Verify no build size regressions
+
+### Error Handling
+- NEVER swallow errors silently
+- Always show user feedback for errors
+- Log errors for debugging
+- Provide actionable error messages
+
+### UI States
+- Every async operation needs loading state
+- Every operation needs error handling
+- Show user feedback for all actions
+- Disable buttons during async operations
+- Handle loading, error, empty, success states
+
+### Mobile Optimization
+- Touch targets should be at least 44x44px (iOS HIG standard)
+- Test on both Chrome and Safari mobile
+- Ensure responsive design works on all screen sizes
+- Use large, easily tappable buttons
+- Avoid double-tap zoom issues
+
+### Code Quality
+- Keep components focused and single-responsibility
+- Extract reusable logic into composables
+- Avoid deep nesting (max 3 levels)
+- Use meaningful variable and function names
+- Comment only when logic is non-obvious
+
+## Development Workflow
+
+### Standard Feature Development
+
+```
+1. Create feature branch: `feat/feature-name`
+2. Implement feature with tests
+3. Run tests: `npm run test:run`
+4. Build: `npm run build`
+5. Commit: Auto-commit with conventional message
+6. Push: Auto-push to GitHub
+7. Merge to main (if approved by user)
+8. Deploy: Use `/deploy` skill
 ```
 
-## 開發指令
-- `npm run dev` - 啟動開發伺服器
-- `npm run build` - 打包生產版本
-- `npm run preview` - 預覽生產版本
-- `npm run test` - 執行測試（watch 模式）
-- `npm run test:run` - 執行測試（單次）
+### Quick Documentation Updates
 
-## 部署
-專案配置為 GitHub Pages 部署，打包後的檔案位於 `dist/` 目錄。
+```
+1. For CLAUDE.md or README.md changes: Work directly on `main`
+2. For docs/specs/ changes: Work directly on `main`
+3. For code changes: ALWAYS use feature branch
+```
 
-## 開發規範
+## Custom Skills
 
-### Git 工作流程
-1. **分支規範**：除非是修改 `CLAUDE.md` 或 `README.md`，否則所有代碼修改必須在新的 feature branch 執行。
-2. **自動命名**：根據任務內容自動命名分支，格式為 `<type>/<short-description>`，例如：
-   - `feat/add-volume-control` - 新功能
-   - `fix/audio-playback-error` - 錯誤修復
-   - `refactor/optimize-modal` - 重構
-   - `style/update-button-design` - 樣式調整
-3. **開發流程**：
-   - 建立新分支 → 開發功能 → 執行 `npm run test:run` 與 `npm run build`
-   - 測試通過後自動 commit（使用規範的 Commit Message）
-   - 提示使用者是否要合併回 `main` 並執行部署
+Available skills are located in `.claude/skills/`:
 
-### Commit 規範
-- **自動提交規則**：每當完成一個功能修改並通過測試，必須自動執行 `git commit`，並使用規範的 Commit Message（格式：`<type>: <description>`，例如 `feat: 新增外連電台提示彈窗`）。
-- **自動推送規則**：當使用者確認 commit 內容沒問題後，自動執行 `git push`，確保 GitHub 遠端倉庫永遠保持最新狀態。
+- `/add` - Add new radio station
+- `/deploy` - Deploy to GitHub Pages
+
+Refer to individual `SKILL.md` files for detailed usage.
+
+## Common Commands
+
+```bash
+# Development
+npm run dev              # Start dev server (http://localhost:5173)
+npm run build            # Build for production
+npm run preview          # Preview production build
+
+# Testing
+npm run test             # Run tests in watch mode
+npm run test:run         # Run tests once (for CI/CD)
+
+# Deployment (via Claude skill)
+/deploy                  # Deploy to GitHub Pages
+```
+
+## Automated Rules
+
+### Pre-Commit Checks
+1. Run `npm run test:run` - All tests must pass
+2. Run `npm run build` - Build must succeed
+3. No console errors or warnings
+
+### Auto-Commit Triggers
+- Feature implementation complete
+- All tests passing
+- Build successful
+- User confirms implementation is ready
+
+### Auto-Push Policy
+- Only after user confirms commit content
+- Ensures GitHub remote is always up-to-date
+- Enables seamless collaboration
+
+## Feature Specifications
+
+For detailed feature specifications, see `docs/specs/`:
+
+- **[Playback Logic](docs/specs/playback.md)** - HTTPS/HTTP handling, audio player
+- **[Data Structure](docs/specs/data-structure.md)** - Radio data format, state management
+- **[UI Design](docs/specs/ui-design.md)** - Mobile optimization, visual design system
+
+Always refer to specs when implementing features to ensure consistency.
