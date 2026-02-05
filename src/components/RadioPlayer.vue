@@ -23,6 +23,13 @@ const playlists = ref([
       '7NOSDKb0HlU',  // Lofi relax
       'lTRiuFIWV54'   // Lofi chill
     ]
+  },
+  {
+    id: 2,
+    name: '民歌 🎸',
+    videoIds: [
+      '50dyyevLH6I'   // 民歌精選
+    ]
   }
 ])
 
