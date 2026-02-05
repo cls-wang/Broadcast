@@ -19,6 +19,12 @@
 - 視覺設計系統
 - 互動設計原則
 
+### [YouTube 播放清單 (youtube-playlist.md)](youtube-playlist.md)
+- YouTube IFrame Player API 整合
+- 隨機播放與自動連續播放
+- 播放清單資料結構
+- 與電台播放器互斥邏輯
+
 ## 新增規格
 
 當需要新增功能規格時：
