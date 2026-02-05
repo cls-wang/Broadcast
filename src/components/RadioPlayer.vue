@@ -2,14 +2,40 @@
 import { ref, onUnmounted } from 'vue'
 import { stations } from '../data/stations.js'
 import { isHttpsUrl } from '../utils/url.js'
+import YouTubePlayer from './YouTubePlayer.vue'
 
+// 電台狀態
 const currentStation = ref(null)
 const isPlaying = ref(false)
 const audioElement = ref(null)
 const showExternalModal = ref(false)
 const pendingExternalStation = ref(null)
 
+// YouTube 播放清單資料
+const playlists = ref([
+  {
+    id: 1,
+    name: '放鬆音樂 🎵',
+    videoIds: [
+      'jfKfPfyJRdk',  // Lofi hip hop
+      '5qap5aO4i9A',  // Lofi study
+      'DWcJFNfaw9c',  // Lofi sleep
+      '7NOSDKb0HlU',  // Lofi relax
+      'lTRiuFIWV54'   // Lofi chill
+    ]
+  }
+])
+
+// YouTube 播放器狀態
+const currentPlaylist = ref(null)
+const isYouTubePlayerActive = ref(false)
+
 const playStation = (station) => {
+  // 停止 YouTube 播放器（如果正在播放）
+  if (isYouTubePlayerActive.value) {
+    stopYouTubePlayer()
+  }
+
   if (isHttpsUrl(station.url)) {
     // HTTPS stream - play with audio element
     if (currentStation.value?.id === station.id && isPlaying.value) {
@@ -84,8 +110,25 @@ const isCurrentStation = (station) => {
   return currentStation.value?.id === station.id
 }
 
+// YouTube 播放清單相關方法
+const playPlaylist = (playlist) => {
+  // 停止電台播放（如果正在播放）
+  if (isPlaying.value) {
+    stopAudio()
+  }
+
+  currentPlaylist.value = playlist
+  isYouTubePlayerActive.value = true
+}
+
+const stopYouTubePlayer = () => {
+  currentPlaylist.value = null
+  isYouTubePlayerActive.value = false
+}
+
 onUnmounted(() => {
   stopAudio()
+  stopYouTubePlayer()
 })
 </script>
 
@@ -112,8 +155,8 @@ onUnmounted(() => {
         </div>
       </div>
 
-      <!-- Station Cards -->
-      <div class="flex flex-col gap-4">
+      <!-- Radio Station Cards -->
+      <div v-if="!isYouTubePlayerActive" class="flex flex-col gap-4">
         <div
           v-for="station in stations"
           :key="station.id"
@@ -193,6 +236,55 @@ onUnmounted(() => {
             ></span>
           </div>
         </div>
+      </div>
+
+      <!-- Divider -->
+      <div v-if="!isYouTubePlayerActive" class="my-8 flex items-center gap-4">
+        <div class="flex-1 h-px bg-slate-700"></div>
+        <span class="text-sm font-medium text-slate-500">或</span>
+        <div class="flex-1 h-px bg-slate-700"></div>
+      </div>
+
+      <!-- YouTube Playlist Buttons -->
+      <div v-if="!isYouTubePlayerActive" class="flex flex-col gap-4">
+        <h2 class="text-lg font-semibold text-white">YouTube 播放清單</h2>
+        <div
+          v-for="playlist in playlists"
+          :key="playlist.id"
+          class="rounded-2xl bg-red-900/20 p-4 backdrop-blur-sm transition-all duration-200 hover:bg-red-900/30 active:scale-[0.98] sm:p-5"
+        >
+          <div class="flex items-center justify-between gap-4">
+            <!-- Playlist Info -->
+            <div class="flex-1 min-w-0">
+              <h3 class="text-lg font-semibold text-white truncate sm:text-xl">
+                {{ playlist.name }}
+              </h3>
+              <p class="mt-1 text-sm text-slate-400">
+                {{ playlist.videoIds.length }} 首影片 • 隨機播放
+              </p>
+            </div>
+
+            <!-- Play Button -->
+            <button
+              @click="playPlaylist(playlist)"
+              class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-red-600 text-white transition-all duration-200 hover:bg-red-500 active:scale-95 sm:h-16 sm:w-16"
+              :aria-label="'播放 ' + playlist.name"
+            >
+              <!-- YouTube Play Icon -->
+              <svg class="h-7 w-7 sm:h-8 sm:w-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- YouTube Player -->
+      <div v-if="isYouTubePlayerActive && currentPlaylist">
+        <YouTubePlayer
+          :playlist="currentPlaylist"
+          @stop="stopYouTubePlayer"
+        />
       </div>
 
       <!-- Stop Button -->
