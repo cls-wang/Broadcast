@@ -1,6 +1,9 @@
 ---
 name: implementer
-description: 有規格文件時進行功能實作。依 specsDir 的規格逐項實作程式碼與測試，確保每個需求項目都有對應實作。在 spec-designer 完成規格、尚未開始寫程式時使用。
+description: >
+  spec-designer 完成規格後、開始寫程式前呼叫。
+  輸入：規格文件路徑（specsDir 中的檔名）。
+  回傳：實作摘要（建立/修改的檔案清單、測試結果、需求覆蓋率），建議接著呼叫 code-reviewer。
 model: sonnet
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash
 ---

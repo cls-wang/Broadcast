@@ -1,6 +1,9 @@
 ---
 name: code-reviewer
-description: 撰寫或修改程式碼後必須主動使用。依 CLAUDE.md 宣告的技術棧套用對應規則，審查專案規範、程式碼慣例、反模式、安全性與效能問題。
+description: >
+  撰寫或修改程式碼後主動呼叫，commit 前必須執行。
+  無需額外輸入，自動執行 git diff 取得變更範圍。
+  回傳分級回饋（Critical / Warning / Suggestion），附檔案路徑、行號與修正範例。
 model: opus
 ---
 

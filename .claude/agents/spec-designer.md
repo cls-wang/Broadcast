@@ -1,6 +1,9 @@
 ---
 name: spec-designer
-description: 設計與維護功能規格文件。規劃新功能、更新規格或在實作前釐清需求時使用。
+description: >
+  規劃新功能或需求尚未明確時呼叫，implementer 執行前必須先執行。
+  輸入：功能名稱與需求描述。
+  回傳：specsDir 中建立或更新的規格文件路徑，以及建議的實作順序摘要。
 model: sonnet
 allowed-tools: Read, Write, Edit, Glob, Grep
 ---

@@ -1,6 +1,9 @@
 ---
 name: github-workflow
-description: Git 工作流程 agent，處理 commit、branch 管理與 PR 建立。建立 branch 前必須驗證 type 與 scope 是否合法。
+description: >
+  需要建立 branch、建立 commit 或開 PR 時呼叫。
+  輸入：操作類型（branch / commit / PR）與相關描述（功能名稱、scope）。
+  回傳：操作結果摘要（branch 名稱 / commit hash / PR URL）。branch 建立前自動驗證 type 與 scope 合法性。
 model: sonnet
 ---
 
