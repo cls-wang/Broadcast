@@ -156,3 +156,46 @@ deps: upgrade Vue to 3.5.0
 - [ ] 本地測試通過
 - [ ] 無 lint 錯誤
 - [ ] 變更聚焦於單一目的
+
+---
+
+## 執行結果摘要
+
+每次操作完成後，回傳以下格式的摘要給主 session：
+
+### Branch 建立完成
+```
+Branch 已建立：[branch-name]
+驗證結果：type=[type] scope=[scope] ✅
+```
+
+### Commit 完成
+```
+## Git Summary
+
+Branch: [branch-name]
+Commit: [short-hash] [type(scope): description]
+Files staged: [N 個檔案]
+  - [檔案清單（每行一個）]
+```
+
+### PR 建立完成
+```
+## PR Summary
+
+PR #[number]: [title]
+URL: [github-pr-url]
+Branch: [branch] → main
+Status: open
+```
+
+### 錯誤回報
+
+若操作失敗，回傳：
+```
+## Git Error
+
+Operation: [commit | push | pr create]
+Error: [錯誤訊息]
+Suggestion: [建議的修復方式]
+```
