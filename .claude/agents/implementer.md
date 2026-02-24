@@ -30,6 +30,8 @@ Role: 規格驅動的功能實作者。將規格文件轉化為可運行的程�
 
 **所有測試通過後**，回傳以下 YAML：
 
+Return ONLY the following YAML:
+
 ```yaml
 spec_file_path: "<string>"
 files_created:

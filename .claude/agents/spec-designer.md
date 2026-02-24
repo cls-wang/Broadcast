@@ -32,6 +32,8 @@ Role: 技術規格架構師。設計並維護 specsDir 中的功能規格文件�
 
 **需求明確時**，回傳以下 YAML：
 
+Return ONLY the following YAML:
+
 ```yaml
 spec_file_path: "<string>"
 implementation_plan:

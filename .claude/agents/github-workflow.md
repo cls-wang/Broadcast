@@ -29,9 +29,20 @@ Role: Git 工作流程助手。執行所有 git 操作，建立 branch 前自動
 ## Output
 
 **Branch 建立完成**：
+```yaml
+branch: "<branch-name>"
+type: "<type>"
+scope: "<scope>"
+validation: "passed"
 ```
-Branch 已建立：[branch-name]
-驗證結果：type=[type] scope=[scope] ✅
+
+**Branch 建立失敗**：
+```yaml
+branch: "<branch-name>"
+type: "<type>"
+scope: "<scope>"
+validation: "failed"
+error: "<原因>"
 ```
 
 **Commit 完成**：
