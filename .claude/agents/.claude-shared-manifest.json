@@ -1,0 +1,22 @@
+﻿{
+    "syncedAt":  "2026-02-24T15:27:09.4699062+08:00",
+    "agents":  {
+                   "github-workflow.md":  {
+                                              "syncedAt":  "2026-02-24T15:27:09.4420004+08:00",
+                                              "hash":  "78A5AEC10C3FE2C87FFBACA34B9B3810F9F93E148F11A19424147620356B859E",
+                                              "sourceSize":  2001
+                                          },
+                   "code-reviewer.md":  {
+                                            "syncedAt":  "2026-02-24T15:27:09.4290438+08:00",
+                                            "hash":  "35E38243D01FE1CCC5596E01AFB9AF0430C48205CCFE681EE5088E1FAC6586D0",
+                                            "sourceSize":  4155
+                                        },
+                   "spec-designer.md":  {
+                                            "syncedAt":  "2026-02-24T15:27:09.4509701+08:00",
+                                            "hash":  "700A0D261ACAA731914ED08FBF74636096B2BF81D83FFC69DA1A79776B28C25F",
+                                            "sourceSize":  5614
+                                        }
+               },
+    "submoduleCommit":  "03d562bf8393f8829b9f55b027d9a646d1941724",
+    "version":  1
+}

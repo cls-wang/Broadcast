@@ -1,0 +1,3 @@
+[submodule "claude-shared-config"]
+	path = claude-shared-config
+	url = D:/claude-shared-config
