@@ -1,0 +1,15 @@
+{
+  "_comment": "Copy this file to your project root. Delete all _comment fields before committing.",
+
+  "submodulePath": "claude-shared-config",
+  "_submodulePath_comment": "Submodule directory name (as specified in git submodule add). Usually unchanged.",
+
+  "agentsDir": ".claude/agents",
+  "_agentsDir_comment": "Destination for synced agents. Do NOT change -- Claude Code requires .claude/agents/.",
+
+  "exclude": [],
+  "_exclude_comment": "Agent filenames to skip, e.g. [\"code-reviewer.md\"]. Empty array = sync all.",
+
+  "specsDir": "docs/specs",
+  "_specsDir_comment": "Spec directory for spec-designer agent. Also update Specs Location in CLAUDE.md."
+}

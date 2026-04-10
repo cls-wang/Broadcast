@@ -31,45 +31,26 @@
 - Prefer composition over inheritance
 - No TypeScript `any` - use proper types or `unknown`
 
+## Project Scopes
+
+<!-- github-workflow agent 驗證 branch/commit scope 時會讀取此段落 -->
+
+| Scope | 說明 |
+|-------|------|
+| `player` | 音訊播放器核心（播放、暫停、音量、進度） |
+| `station` | 電台資料管理 |
+| `playlist` | 播放清單管理 |
+| `ui` | UI 元件與版面配置 |
+
 ## Git Conventions
 
-### Branch Naming
-- **Rule**: All code changes (except `CLAUDE.md` or `README.md`) MUST be on feature branches
-- **Format**: `<type>/<short-description>`
-- **Types**:
-  - `feat/` - New features
-  - `fix/` - Bug fixes
-  - `refactor/` - Code refactoring
-  - `style/` - UI/styling changes
-  - `test/` - Test additions or updates
-  - `docs/` - Documentation updates
-- **Examples**:
-  - `feat/add-volume-control`
-  - `fix/audio-playback-error`
-  - `refactor/optimize-modal`
-  - `style/update-button-design`
-
-### Commit Format
-- **Style**: Conventional Commits
-- **Format**: `<type>: <description>`
-- **Description**: Clear, concise, in Chinese or English
-- **Examples**:
-  - `feat: 新增音量控制功能`
-  - `fix: 修正 HTTPS 電台播放錯誤`
-  - `refactor: 重構彈窗元件邏輯`
-  - `style: 更新按鈕樣式與間距`
-  - `test: 新增播放邏輯測試`
-  - `docs: 更新 API 文件`
+> Branch 命名與 commit 格式遵循共用的 `github-workflow` agent 規範。
+> Scope 驗證範圍：共用 scopes（ci/deps/config/build/release）+ 上方 Project Scopes。
 
 ### Automated Workflow
 
-1. **Branch Creation**: Automatically create feature branch based on task
-2. **Development**: Write code following project conventions
-3. **Testing**: Run `npm run test:run` to verify all tests pass
-4. **Building**: Run `npm run build` to ensure production build succeeds
-5. **Auto Commit**: Automatically commit with conventional commit message
-6. **Auto Push**: Push to GitHub after user confirmation
-7. **Merge & Deploy**: Prompt user to merge to `main` and deploy
+1. Create feature branch → Develop → `npm run test:run` → `npm run build`
+2. Auto-commit → Push after user confirmation → Merge to `main` → `/deploy`
 
 ## Critical Rules
 
@@ -135,16 +116,6 @@
 2. For docs/specs/ changes: Work directly on `main`
 3. For code changes: ALWAYS use feature branch
 ```
-
-## Agents
-
-Available agents are located in `.claude/agents/`:
-
-- **spec-designer** - Designs and maintains feature specifications
-  - Use BEFORE implementing new features
-  - Creates/updates specs in `docs/specs/`
-  - Ensures consistency with existing spec structure
-  - Provides implementation guidance to main agent
 
 ## Custom Skills
 
