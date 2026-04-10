@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Claude Code local settings (per-developer, do not commit)
+.claude/settings.local.json

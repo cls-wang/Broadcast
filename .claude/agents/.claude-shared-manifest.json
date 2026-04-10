@@ -1,27 +1,116 @@
-﻿{
-    "syncedAt":  "2026-02-24T20:18:03.3968560+08:00",
-    "agents":  {
-                   "github-workflow.md":  {
-                                              "syncedAt":  "2026-02-24T20:18:03.3530036+08:00",
-                                              "hash":  "50709E2A69AE326F203910E7B7AA31589C5A87990A518AE0215841B544DDE0D4",
-                                              "sourceSize":  2025
-                                          },
-                   "implementer.md":  {
-                                          "syncedAt":  "2026-02-24T20:18:03.3639674+08:00",
-                                          "hash":  "2B97275C1E4D994F20502B340DCD0845F5B5EC16F7C9419114F1203342089BA2",
-                                          "sourceSize":  1871
-                                      },
-                   "code-reviewer.md":  {
-                                            "syncedAt":  "2026-02-24T16:49:21.0490423+08:00",
-                                            "hash":  "F0DDB0D1B01E8FFAA5FA476B810514E4976E22854D0FAFF7F8CF0F24D93EE45C",
-                                            "sourceSize":  1795
-                                        },
-                   "spec-designer.md":  {
-                                            "syncedAt":  "2026-02-24T20:18:03.3749301+08:00",
-                                            "hash":  "823FCF8D5E91B42057D8261E51A173E48DFAE21F64963F8FEC43776485446EC5",
-                                            "sourceSize":  1637
-                                        }
-               },
-    "submoduleCommit":  "771a2152c98ee954f225daaaa27523f9efc2215f",
-    "version":  1
+{
+  "version": 2,
+  "packageName": "@cls-wang/claude-shared-config",
+  "packageVersion": "0.1.3",
+  "syncedAt": "2026-04-10T13:56:54.051Z",
+  "agents": {
+    "code-reviewer.md": {
+      "hash": "ae263c97fefcc00bfc3544499d3ec1e30405d9899d93436427a04ea27447469a",
+      "syncedAt": "2026-04-10T13:56:53.922Z",
+      "sourceSize": 3017
+    },
+    "github-workflow.md": {
+      "hash": "cbb86e398943a68ebc6a5b3c6194993553bfd5b6cf109fa5d09cafea1d66f3e2",
+      "syncedAt": "2026-04-10T13:56:53.933Z",
+      "sourceSize": 2469
+    },
+    "implementer.md": {
+      "hash": "01f5b0980e55f9102c2dc6b2677da50d1255a6a2e5970663e9890e8a0e01a4dc",
+      "syncedAt": "2026-04-10T13:56:53.942Z",
+      "sourceSize": 2438
+    },
+    "spec-designer.md": {
+      "hash": "15bf2451043d940d7f4dcf51a82382c5b4f11e4763f6eef80c03684bedc79d1c",
+      "syncedAt": "2026-04-10T13:56:53.950Z",
+      "sourceSize": 2513
+    }
+  },
+  "skills": {
+    "abi-compatibility-check": {
+      "hash": "fadc25c5644df4bdf00124a80d7e7dbd5b9547347c1ffe6d4d377b857c3c483f",
+      "syncedAt": "2026-04-10T13:56:53.954Z",
+      "sourceSize": 4584
+    },
+    "api-contract-validation": {
+      "hash": "a53fa4ee3c9f8cf358e504e18684d12da8f2a71c80cd046b771dc077e1637059",
+      "syncedAt": "2026-04-10T13:56:53.969Z",
+      "sourceSize": 5206
+    },
+    "commit-history-analyzer": {
+      "hash": "4167032dd4a77564223280a9403e91f2c6ca76d665abbe928814baae83fb9086",
+      "syncedAt": "2026-04-10T13:56:53.970Z",
+      "sourceSize": 638
+    },
+    "electron-builder-win-fix": {
+      "hash": "cfa4942b4cabe0fe58a58530aa0a158248dbfc6334b576edec1924608dbb9459",
+      "syncedAt": "2026-04-10T13:56:53.980Z",
+      "sourceSize": 4045
+    },
+    "manual-change": {
+      "hash": "8c4a8f35ff0bff7ec28963327a94f330180bdad8235bb4d70dc209cb80700a9c",
+      "syncedAt": "2026-04-10T13:56:53.987Z",
+      "sourceSize": 1241
+    },
+    "pr-summary": {
+      "hash": "7c8a3983d417a1aaeba892492bed786d110d8d4fae4f08bb9936a6bc51c81c2e",
+      "syncedAt": "2026-04-10T13:56:53.995Z",
+      "sourceSize": 633
+    },
+    "ship-branch": {
+      "hash": "55f6d06e47b92af7c83e6f5819817608875f0f58d3b2edc9ed35325d42b138fa",
+      "syncedAt": "2026-04-10T13:56:53.997Z",
+      "sourceSize": 2206
+    },
+    "sync-shared-config": {
+      "hash": "3c526fded93b298cbe4a7c6e7602b8908aa67dfecb06148a2d017b202449544a",
+      "syncedAt": "2026-04-10T13:56:53.999Z",
+      "sourceSize": 1334
+    }
+  },
+  "hooks": {
+    "clear-review-flag.js": {
+      "hash": "71dc9e0e3da5def8ac15abd15f9413d64fbd390944a6428719688a3c93dc4cf9",
+      "syncedAt": "2026-04-10T13:56:54.001Z",
+      "sourceSize": 1317
+    },
+    "console-warn.js": {
+      "hash": "144c9fe3d2def0fc45fea2ee36176de5555526a7bd98609dc49d1b70c2010855",
+      "syncedAt": "2026-04-10T13:56:54.003Z",
+      "sourceSize": 1699
+    },
+    "guardrail.js": {
+      "hash": "6332ab7c6c4bf44f3923fc68bc87e3b50491080e94d993b5e648760e6fd8908c",
+      "syncedAt": "2026-04-10T13:56:54.005Z",
+      "sourceSize": 1695
+    },
+    "lib/project-hash.js": {
+      "hash": "276082fc50777c760ee91cd5988487204c2777ae5b2e7ed5a310bf21c5846b56",
+      "syncedAt": "2026-04-10T13:56:54.008Z",
+      "sourceSize": 753
+    },
+    "require-branch.js": {
+      "hash": "83ddd71eab936b86114878714ecd26924a9ee0adcd9a48e51219c1652b59f820",
+      "syncedAt": "2026-04-10T13:56:54.010Z",
+      "sourceSize": 1770
+    },
+    "require-code-review.js": {
+      "hash": "dcab508e7ac0467284f173fa634840dd015d4051f6b70e6e1813cf8cd23be827",
+      "syncedAt": "2026-04-10T13:56:54.025Z",
+      "sourceSize": 1516
+    },
+    "set-review-flag.js": {
+      "hash": "74a66faaa0772613f0d85267b7bf1f8cdd450d574c0427dab33b197b3f9b00a9",
+      "syncedAt": "2026-04-10T13:56:54.027Z",
+      "sourceSize": 715
+    },
+    "suggest-compact.js": {
+      "hash": "01e00428e41c3dddc2a8510bce0e7f927adb2c84625b4fb8ce68cd1563b7c268",
+      "syncedAt": "2026-04-10T13:56:54.030Z",
+      "sourceSize": 1549
+    }
+  },
+  "claudeMd": {
+    "sectionHash": "",
+    "syncedAt": ""
+  }
 }

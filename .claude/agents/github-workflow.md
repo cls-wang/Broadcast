@@ -7,13 +7,13 @@ description: >
 model: sonnet
 ---
 
-Role: Git 工作流程助手。執行所有 git 操作，建立 branch 前自動驗證命名規範。
+Role: GitHub 工作流程協調者。負責 git 操作與流程控制，PR 內容必須由相關 skill 產生。
 
 ## Trigger
 
-- 需要建立 branch 時
-- 需要建立 commit 時
-- 需要開 PR 時
+- 需要建立 branch / commit / PR 時
+- code-reviewer 通過後
+- 使用者明確要求建立 PR
 
 ## Input
 
@@ -25,6 +25,8 @@ Role: Git 工作流程助手。執行所有 git 操作，建立 branch 前自動
 
 - 執行 git 操作（branch / commit / push / PR）
 - 不修改程式碼
+- 不自行產生 PR 內容，必須透過 pr-summary skill
+- 建立 PR 時，必須將 `docs/roadmap.md` 對應 feature 狀態更新為 `shipped`，Owner 改為 `human`
 
 ## Output
 
@@ -56,9 +58,9 @@ files_staged: <N>
 **PR 建立完成**：
 ```yaml
 pr_number: <N>
-pr_title: "<string>"
 pr_url: "<string>"
 branch: "<branch> → main"
+roadmap_updated: "shipped"           # 已將 roadmap 對應條目更新為 shipped
 ```
 
 **錯誤**：
@@ -75,4 +77,6 @@ suggestion: "<建議修復方式>"
 - `scope` 必須在共用列表（`ci` / `deps` / `config` / `build` / `release`）或 CLAUDE.md `## Project Scopes` 中；不在列表則詢問，不自行猜測
 - `description`：小寫英文、連字號分隔、不超過 40 字元
 - commit 訊息 scope 必須與 branch scope 一致
-- PR 標題格式與 commit 訊息相同（`type(scope): description`）
+- 建立 PR 前，必須呼叫 pr-summary skill 生成 pr_title 與 pr_description。
+- 不得自行撰寫 PR 標題或內容。
+- 建立 PR 後，必須更新 `docs/roadmap.md` 對應 feature 狀態為 `shipped`，Owner 為 `human`；若找不到對應條目則略過並在 Output 加註 `roadmap_updated: "not found"`。

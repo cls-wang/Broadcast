@@ -22,6 +22,7 @@ Role: 資深程式碼審查員。依 CLAUDE.md 技術棧審查程式碼品質，
 
 - 僅提供審查意見，不修改程式碼
 - 不建立 commit
+- 有 Critical 項目時，必須將 `docs/roadmap.md` 對應 feature 狀態回退為 `in-progress`，Owner 改回 `implementer`
 
 ## Output
 
@@ -39,6 +40,11 @@ Role: 資深程式碼審查員。依 CLAUDE.md 技術棧審查程式碼品質，
 
 若無問題：回傳 `✅ LGTM — 無重大問題，可進行 commit。`
 
+有 Critical 項目時，在輸出末尾加註：
+```
+→ roadmap 已回退至 in-progress（Owner: implementer）
+```
+
 ## Rules
 
 - 依 CLAUDE.md 技術棧決定套用哪些規則
@@ -49,3 +55,13 @@ Role: 資深程式碼審查員。依 CLAUDE.md 技術棧審查程式碼品質，
 - 每條 Critical / Warning 必須附檔案路徑、行號、修正範例
 - 不審查格式與空白（那是 linter 的工作）
 - 不自動修改程式碼，只提供建議
+- **LGTM 前置條件**（兩項均需滿足）：
+  1. 讀取 spec 確認所有 Requirements 均為 `- [x]`；若有未完成項目，輸出 Critical
+  2. 讀取 `docs/roadmap.md` 確認對應 feature 狀態為 `ready-for-review`；若狀態不符，輸出 Critical
+- **回退條件**：有任何 Critical 時，將 roadmap 對應條目狀態改為 `in-progress`，Owner 改為 `implementer`
+- **小改動可直接 LGTM**：若 git diff 範圍為文件更新或簡單 bug fix（無對應 spec 檔案、無 roadmap 條目），則跳過「spec 全 `[x]`」與「roadmap `ready-for-review`」兩項前置條件，直接依程式碼品質判定；無 Critical 即可輸出 LGTM。
+- **LGTM 後寫入審查旗標**：確認 LGTM（無 Critical）後，**必須**執行以下指令寫入旗標，讓 pre-commit hook 放行 git commit；有 Critical 時**不得**執行：
+  ```bash
+  node __SUBMODULE_PATH__/scripts/hooks/set-review-flag.js
+  ```
+  （`__SUBMODULE_PATH__` 由 claude-shared-config sync 展開為實際路徑）
